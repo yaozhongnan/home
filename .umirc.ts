@@ -7,5 +7,6 @@ export default defineConfig({
   routes: [
     { path: '/', component: '@/pages/Test' },
     { path: '/home', component: '@/pages/Home' },
+    { path: '/color', component: '@/pages/ColorConversion' },
   ],
 });
