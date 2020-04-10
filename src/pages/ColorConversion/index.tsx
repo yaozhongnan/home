@@ -1,16 +1,27 @@
-import React from 'react';
-import { PageHeader, Divider, Input, Button, Typography } from 'antd';
-import { hex2Rgb, rgb2Hex } from '@/utils/index.ts';
+import React, { useState } from 'react';
+import { PageHeader, Divider, Input, Button, Typography, message } from 'antd';
+import Result from './Result';
+import ColorMap from './Map';
+import colorUtil from '@/utils/color.ts';
 import commonStyles from '@/assets/common.less';
-import styles from './index.less';
 
-const { Paragraph, Text } = Typography;
-
-export default () => {
+const ColorConversion: React.FC = () => {
   let input: string = '';
 
+  const [rgb, setRgb] = useState('');
+  const [hex, setHex] = useState('');
+
   const handleConversion = () => {
-    console.log(rgb2Hex(input));
+    const { type } = colorUtil.check(input);
+    if (!type) message.error('Invalid parameter');
+    if (type === 'rgb') {
+      setHex(colorUtil.rgb2Hex(input));
+      setRgb(input);
+    }
+    if (type === 'hex') {
+      setHex(input);
+      setRgb(colorUtil.hex2Rgb(input));
+    }
   };
 
   return (
@@ -25,30 +36,16 @@ export default () => {
         <Input
           style={{ marginBottom: 24 }}
           onChange={e => (input = e.target.value)}
-          placeholder="输入十六进制 / RGB颜色值"
+          placeholder="输入十六进制 / RGB 颜色值。例：#FAFAFA / #FFF / 255,255,0"
         />
         <Button type="primary" onClick={handleConversion}>
           转换
         </Button>
-        <div className={styles.desc}>
-          <Paragraph>
-            <Text
-              strong
-              style={{
-                fontSize: 16,
-              }}
-            >
-              Result:
-            </Text>
-          </Paragraph>
-          <Paragraph>
-            RGB <a>Thaw immediately</a>， 16 进制 <a>Apply Unlock</a>
-          </Paragraph>
-          <Paragraph style={{ background: 'transparent' }}>
-            your color
-          </Paragraph>
-        </div>
+        <Result hex={hex} rgb={rgb} />
+        <ColorMap />
       </div>
     </div>
   );
 };
+
+export default ColorConversion;
