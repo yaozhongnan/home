@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { PageHeader, Divider, Input, Button, Typography, message } from 'antd';
+import { PageHeader, Divider, Input, Button, message } from 'antd';
 import Result from './Result';
 import ColorMap from './Map';
-import colorUtil from '@/utils/color.ts';
+import colorUtil from '@/utils/color';
 import commonStyles from '@/assets/common.less';
 
 const ColorConversion: React.FC = () => {
