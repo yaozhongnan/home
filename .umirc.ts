@@ -8,5 +8,6 @@ export default defineConfig({
     { path: '/', component: '@/pages/Test' },
     { path: '/home', component: '@/pages/Home' },
     { path: '/color', component: '@/pages/Color' },
+    { path: '/video', component: '@/pages/Video' },
   ],
 });
